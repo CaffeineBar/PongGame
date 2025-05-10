@@ -1,0 +1,187 @@
+[gd_scene load_steps=14 format=3 uid="uid://bc83mivj8r55w"]
+
+[ext_resource type="Texture2D" uid="uid://dk5nxkc5wyfjy" path="res://Assets/Bg.png" id="1_e0klk"]
+[ext_resource type="Script" uid="uid://by2uwsitjy0tf" path="res://Script/main.gd" id="2_6mn82"]
+[ext_resource type="FontFile" uid="uid://c2nyqc7vu1v4p" path="res://Assets/pixel_font.ttf" id="2_8nxyt"]
+[ext_resource type="Script" uid="uid://cje0vx7j53605" path="res://Script/player.gd" id="3_6mn82"]
+[ext_resource type="Script" uid="uid://dpwt3dig2dlbe" path="res://Script/bola.gd" id="4_4c4gb"]
+[ext_resource type="Script" uid="uid://c4540w1qkmq7o" path="res://Script/cpu.gd" id="4_4e36o"]
+[ext_resource type="AudioStream" uid="uid://ce3ieeoy38cic" path="res://Assets/[freesound-edited] pong ball.wav" id="6_quh8c"]
+[ext_resource type="AudioStream" uid="uid://dx57sgp1evs4t" path="res://Assets/[freesound-edited] pling sound effect.wav" id="8_2yi6e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6mn82"]
+size = Vector2(20, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4c4gb"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4e36o"]
+size = Vector2(1152, 144)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_quh8c"]
+size = Vector2(1152, 136)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2yi6e"]
+size = Vector2(64, 648)
+
+[node name="Main" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_e0klk")
+centered = false
+script = ExtResource("2_6mn82")
+metadata/_edit_horizontal_guides_ = [80.0, 576.0]
+
+[node name="Player" type="StaticBody2D" parent="."]
+position = Vector2(50, 324)
+script = ExtResource("3_6mn82")
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -75.0
+offset_right = 20.0
+offset_bottom = 75.0
+grow_vertical = 2
+color = Color(1, 0.913725, 0.662745, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(10, 0)
+shape = SubResource("RectangleShape2D_6mn82")
+
+[node name="CPU" type="StaticBody2D" parent="."]
+position = Vector2(1082, 324)
+script = ExtResource("4_4e36o")
+
+[node name="ColorRect" type="ColorRect" parent="CPU"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -75.0
+offset_right = 20.0
+offset_bottom = 75.0
+grow_vertical = 2
+color = Color(1, 0.913725, 0.662745, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CPU"]
+position = Vector2(10, 0)
+shape = SubResource("RectangleShape2D_6mn82")
+
+[node name="Bola" type="CharacterBody2D" parent="."]
+position = Vector2(576, 324)
+collision_mask = 3
+script = ExtResource("4_4c4gb")
+
+[node name="ColorRect" type="ColorRect" parent="Bola"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Bola"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bola"]
+shape = SubResource("RectangleShape2D_4c4gb")
+
+[node name="PantulanBola" type="AudioStreamPlayer2D" parent="Bola"]
+stream = ExtResource("6_quh8c")
+
+[node name="Batas" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="Atas" type="CollisionShape2D" parent="Batas"]
+position = Vector2(576, 8)
+shape = SubResource("RectangleShape2D_4e36o")
+
+[node name="Bawah" type="CollisionShape2D" parent="Batas"]
+position = Vector2(576, 636)
+shape = SubResource("RectangleShape2D_quh8c")
+
+[node name="GoalKiri" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalKiri"]
+position = Vector2(-32, 324)
+shape = SubResource("RectangleShape2D_2yi6e")
+
+[node name="GoalKanan" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalKanan"]
+position = Vector2(1184, 324)
+shape = SubResource("RectangleShape2D_2yi6e")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="SkorPlayer" type="Label" parent="HUD"]
+texture_filter = 1
+offset_left = 456.0
+offset_top = 5.0
+offset_right = 496.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("2_8nxyt")
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkorCPU" type="Label" parent="HUD"]
+texture_filter = 1
+offset_left = 648.0
+offset_top = 5.0
+offset_right = 698.0
+offset_bottom = 55.0
+theme_override_fonts/font = ExtResource("2_8nxyt")
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="HUD"]
+offset_left = 100.0
+offset_right = 320.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("2_8nxyt")
+theme_override_font_sizes/font_size = 80
+text = "Player 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="HUD"]
+offset_left = 827.0
+offset_right = 1052.0
+offset_bottom = 131.0
+theme_override_fonts/font = ExtResource("2_8nxyt")
+theme_override_font_sizes/font_size = 80
+text = "Player 2
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimerBola" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="BolaGol" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_2yi6e")
+
+[connection signal="body_entered" from="GoalKiri" to="." method="_on_goal_kiri_body_entered"]
+[connection signal="body_entered" from="GoalKanan" to="." method="_on_goal_kanan_body_entered"]
+[connection signal="timeout" from="TimerBola" to="." method="_on_timer_bola_timeout"]

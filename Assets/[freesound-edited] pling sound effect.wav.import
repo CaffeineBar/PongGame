@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dx57sgp1evs4t"
+path="res://.godot/imported/[freesound-edited] pling sound effect.wav-48a2aa8db8c39f198963b17596b00389.sample"
+
+[deps]
+
+source_file="res://Assets/[freesound-edited] pling sound effect.wav"
+dest_files=["res://.godot/imported/[freesound-edited] pling sound effect.wav-48a2aa8db8c39f198963b17596b00389.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
