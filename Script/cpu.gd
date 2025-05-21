@@ -14,14 +14,22 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	posisi_bola = $"../Bola".position
-	jarak = position.y - posisi_bola.y
+	#UNTUK CPU AKTIFKAN INI
+	#posisi_bola = $"../Bola".position
+	#jarak = position.y - posisi_bola.y
+	#
+	#if abs(jarak) > get_parent().KECEPATAN_PADEL *  delta:
+		#bergerak_oleh = get_parent().KECEPATAN_PADEL * delta * (jarak / abs(jarak))
+	#else:
+		#bergerak_oleh = jarak
+	#
+	#position.y -= bergerak_oleh
 	
-	if abs(jarak) > get_parent().KECEPATAN_PADEL *  delta:
-		bergerak_oleh = get_parent().KECEPATAN_PADEL * delta * (jarak / abs(jarak))
-	else:
-		bergerak_oleh = jarak
-	
-	position.y -= bergerak_oleh
+	if Input.is_action_pressed("ui_up"):
+		position.y -= get_parent().KECEPATAN_PADEL *  delta
+		print("Bergerak ke atas")
+	if Input.is_action_pressed("ui_down"):
+		position.y += get_parent().KECEPATAN_PADEL *  delta
+		print("Bergerak ke bawah")
 	
 	position.y = clamp(position.y, tinggi_padel / 2 + 80, tinggi_window - tinggi_padel / 2 - 80)
